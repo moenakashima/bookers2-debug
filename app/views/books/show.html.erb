@@ -24,16 +24,30 @@
               <% end %>
             <% else %>
               <%= link_to book_favorites_path(@book.id), method: :post do %>
-              ♡<%= @book.favorites.count %>
+               ♡<%= @book.favorites.count %>
               <% end %>
             <% end %>
           </td>
+          <td>コメント数:<%= @book.book_comments.count %></td>
           <% if @book.user.id == current_user.id %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
           <% end %>
         </tr>
       </table>
+      <div>
+          <p><% @book_comments.each do |f| %>
+          <%= f.comment %>
+          <% end %>
+          </p>
+      </div>
+      <div>
+        <%= form_with model:[@book,@book_comment] do |f| %>
+        <%= f.text_field:comment, class: "form-control form-control-lg mb-3" %>
+        <%= f.submit '送信' , class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </div>
