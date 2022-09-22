@@ -35,15 +35,29 @@
           <% end %>
         </tr>
       </table>
-      <div>
-          <p><% @book_comments.each do |f| %>
-          <%= f.comment %>
+      <table >
+
+        <% @book.book_comments.each do |book_comment| %>
+         <tr>
+          <td><%= link_to book_comment.user do %>
+          <%= image_tag book_comment.user.get_profile_image, size: '60x60' %><br>
+          <%= book_comment.user.name %>
           <% end %>
-          </p>
-      </div>
+          </td>
+
+          <td>
+          <%= book_comment.comment %>
+          <% if book_comment.user == current_user %>
+            <%= link_to 'Destroy', book_book_comment_path(@book, book_comment), method: :delete, class: 'btn btn-sm btn-danger' %>
+          <% end %>
+          </td>
+        </tr>
+        <% end %>
+
+      </table>
       <div>
         <%= form_with model:[@book,@book_comment] do |f| %>
-        <%= f.text_field:comment, class: "form-control form-control-lg mb-3" %>
+        <%= f.text_area:comment, rows: "5" ,class: "form-control form-control-lg mb-3" %>
         <%= f.submit '送信' , class: "btn btn-primary" %>
         <% end %>
       </div>
