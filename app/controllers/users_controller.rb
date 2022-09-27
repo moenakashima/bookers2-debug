@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @book = Book.new
+    @user = User.find(current_user.id)
+
   end
 
   def edit
@@ -28,6 +30,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follower'
+  end
+
+
+
+
+
+
+
+
   private
 
   def user_params
@@ -41,4 +62,5 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
 end
