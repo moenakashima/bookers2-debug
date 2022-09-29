@@ -1,0 +1,17 @@
+<% if book.favorited_by?(current_user) %>
+  <%= form_with model: @favorite, url: book_favorites_path(book.id), method: :delete, local: false  do |f| %>
+  <%= f.hidden_field :book_id, value: book.id %>
+    <%= f.button :type => "submit" %>
+    <%= book.favorites.count %>
+  <% end %>
+<% else %>
+  <%= form_with model: @favorite, url: book_favorites_path(book.id), method: :post, local: false  do |f| %>
+  <%= f.hidden_field :book_id, value: book.id %>
+    <%= f.button :type => "submit", style: 'border-style: none;' do %>
+     <i class="fas fa-heart" aria-hidden="true" style="color: blue"></i>
+    <%= book.favorites.count %>
+    <% end %>
+  <% end %>
+
+<% end %>
+
