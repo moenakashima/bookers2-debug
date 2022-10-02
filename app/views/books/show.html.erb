@@ -25,16 +25,15 @@
           <% end %>
         </tr>
       </table>
-      <table >
-        <%= render 'book_comments/book_comment', book: @book %>
+      <table id= "book_comment-<%= @book.id %>">
+      <%= render 'book_comments/book_comment',  book: @book, book_comment: @book_comment%>
       </table>
       <div>
-        <%= form_with model:[@book,@book_comment] do |f| %>
-        <%= f.text_area:comment, rows: "5" ,class: "form-control form-control-lg mb-3" %>
+        <%= form_with model:[@book,@book_comment], local: false do |f| %>
+        <%= f.text_area :comment, rows: "5" ,class: "form-control form-control-lg mb-3" %>
         <%= f.submit '送信' , class: "btn btn-primary" %>
         <% end %>
       </div>
-
     </div>
   </div>
 </div>
