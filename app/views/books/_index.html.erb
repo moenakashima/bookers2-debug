@@ -1,10 +1,10 @@
-<table class='table table-hover table-inverse'>
+<table class= "table table-hover table-inverse">
   <thead>
     <tr>
       <th></th>
       <th>Title</th>
       <th>Opinion</th>
-      <th colspan="3"></th>
+      <th colspan= "3"></th>
     </tr>
   </thead>
 
@@ -18,7 +18,7 @@
         </td>
         <td><%= link_to book.title, book_path(book.id) %></td>
         <td><%= book.body %></td>
-        <td id="favorite-btn-<%= book.id %>">
+        <td id= "favorite-btn-<%= book.id %>">
           <%= render 'favorites/favorite-btn', book: book %>
         </td>
         <td>
